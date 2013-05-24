@@ -371,6 +371,29 @@ void GPBFile::groupMeshSkinAnimations()
     }
 }
 
+void GPBFile::groupMeshAnimations()
+{
+    // does anything need grouping?
+    if (_animations.getAnimationCount() > 1)
+    {
+        std::vector<Node*> nodes(_nodes.begin(), _nodes.end());
+
+        Node* commonAncestor = getCommonNodeAncestor(nodes);
+        if (commonAncestor)
+        {
+            LOG(1, "groupMeshAnimations grouping around common node %s", commonAncestor->getId().c_str());
+
+            // group the animation channels that target this common ancestor and its child nodes
+            Animation* animation = new Animation();
+            animation->setId("animations");
+
+            moveAnimationChannels(commonAncestor, animation);
+            _animations.add(animation);
+        }
+    }
+}
+
+
 void GPBFile::renameAnimations(std::vector<std::string>& animationIds, const char* newId)
 {
     const unsigned int animationCount = _animations.getAnimationCount();

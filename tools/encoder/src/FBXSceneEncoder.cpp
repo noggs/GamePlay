@@ -73,6 +73,8 @@ void FBXSceneEncoder::write(const string& filepath, const EncoderArguments& argu
     {
         _gamePlayFile.groupMeshSkinAnimations();
     }
+
+    _gamePlayFile.groupMeshAnimations();
     
     string outputFilePath = arguments.getOutputFilePath();
 

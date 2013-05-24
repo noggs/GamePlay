@@ -113,6 +113,11 @@ public:
     void groupMeshSkinAnimations();
 
     /**
+     * Groups the animations of all mesh skins to be under one animation per mesh skin.
+     */
+    void groupMeshAnimations();
+
+    /**
      * Renames the animations in the list of animation ids to the new animation id.
      * 
      * @param animationIds The list of animations to rename.
